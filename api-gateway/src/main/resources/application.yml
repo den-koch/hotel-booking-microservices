@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: booking-service
+          uri: http://booking-service:8081
+          predicates:
+            - Path=/api/booking/**, /api/rooms/**, /api/home/**, /api/history/**, /api/guests/**
+        - id: services-service
+          uri: http://services-service:8083
+          predicates:
+            - Path=/api/services/**, /api/service-history/**
