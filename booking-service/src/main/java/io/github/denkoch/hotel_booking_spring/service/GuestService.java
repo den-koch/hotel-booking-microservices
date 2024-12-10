@@ -2,6 +2,7 @@ package io.github.denkoch.hotel_booking_spring.service;
 
 import io.github.denkoch.hotel_booking_spring.dto.GuestDTO;
 import io.github.denkoch.hotel_booking_spring.dto.GuestResponseDTO;
+import io.github.denkoch.hotel_booking_spring.exceptions.ResourceNotFoundException;
 import io.github.denkoch.hotel_booking_spring.model.Guest;
 import io.github.denkoch.hotel_booking_spring.repository.GuestRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,8 @@ public class GuestService {
     }
 
     public GuestResponseDTO getGuestsById(Long guestId) {
-        Guest guest = guestRepository.findById(guestId).orElseThrow(() -> new RuntimeException("Guest {guestId "+ guestId +"} not found"));
+        Guest guest = guestRepository.findById(guestId).orElseThrow(() ->
+                new ResourceNotFoundException("Guest {guestId "+ guestId +"} not found"));
         return modelMapper.map(guest, GuestResponseDTO.class);
     }
 

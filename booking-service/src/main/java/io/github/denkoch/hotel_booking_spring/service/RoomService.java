@@ -40,15 +40,15 @@ public class RoomService {
         Collection<Room> filteredRooms = roomsByBuilding;
 
         if (roomCapacity != null) {
-            filteredRooms = roomsByBuilding.stream()
-                    .filter(room -> room.getCapacity().equals(roomCapacity)).toList();
+            filteredRooms = filteredRooms.stream()
+                    .filter(room -> room.getCapacity() <= roomCapacity).toList();
         }
         if (roomPrice != null) {
-            filteredRooms = roomsByBuilding.stream()
+            filteredRooms = filteredRooms.stream()
                     .filter(room -> room.getPrice() <= roomPrice).toList();
         }
         if (roomType != null) {
-            filteredRooms = roomsByBuilding.stream()
+            filteredRooms = filteredRooms.stream()
                     .filter(room -> room.getRoomType().getRoomType().equals(roomType)).toList();
         }
 
